@@ -98,7 +98,7 @@ services:
         max-size: 10m
 
 volumes:
-  pgdata:
+  # pgdata:
   db:
 
 
