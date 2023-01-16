@@ -99,6 +99,7 @@ services:
 
 volumes:
   pgdata:
+  db:
 
 
 networks:
