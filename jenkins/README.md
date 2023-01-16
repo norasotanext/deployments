@@ -1,5 +1,14 @@
 ## Fix docker permission
 
+My first solutions was:
+
+usermod -aG docker jenkins
+usermod -aG root jenkins
+chmod 664 /var/run/docker.sock
+But none of them work for me, I tried:
+
+chmod 777 /var/run/docker.sock
+
 - https://stackoverflow.com/questions/69039604/sudo-docker-not-found-while-running-the-jenkins-pipeline
 - https://stackoverflow.com/questions/42164653/docker-in-docker-permissions-error/42168499#42168499
 
