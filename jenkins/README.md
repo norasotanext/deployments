@@ -32,5 +32,6 @@ docker run \
 	--volume jenkins-docker-certs:/certs/client:ro \
 	-v $(which docker):/usr/bin/docker \
 	-v /var/run/docker.sock:/var/run/docker.sock \
+	--group-add docker \
 	jenkins
 ```
