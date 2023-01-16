@@ -1,0 +1,106 @@
+version: "3"
+
+services:
+  # postgres:
+  #   container_name: base_postgres
+  #   image: "postgres:12.6-alpine"
+  #   volumes:
+  #     - pgdata:/var/lib/postgres
+  #   networks:
+  #     - sota-network
+  #   environment:
+  #     - POSTGRES_DB=docs
+  #     - POSTGRES_PASSWORD=secret
+  #   ports:
+  #     - 5432:5432
+
+  # mongo:
+  #   container_name: base_mongo
+  #   image: mongo:4.4.6
+  #   restart: always
+  #   ports:
+  #     - 27017:27017
+  #   networks:
+  #     - sota-network
+  #   volumes:
+  #     - ./data/db:/data/db
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: root
+  #     MONGO_INITDB_DATABASE: fizenpay
+  #     DB_NAME: fizenpay
+  #     DB_USER: root
+  #     DB_PASSWORD: root
+
+  # mongo-express:
+  #   container_name: base_mongo-express
+  #   image: mongo-express:latest
+  #   restart: always
+  #   depends_on:
+  #     - mongo
+  #   networks:
+  #     - sota-network
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: root
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
+
+  # rabbitmq:
+  #   container_name: base_rabbitmq
+  #   image: rabbitmq:3-management-alpine
+  #   ports:
+  #     - 5672:5672
+  #     - 15672:15672
+  #   networks:
+  #     - sota-network
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=admin
+  #     - RABBITMQ_DEFAULT_PASS=admin
+
+  # rabbitmq_test:
+  #   container_name: base_rabbitmq_test
+  #   image: rabbitmq:3-management-alpine
+  #   ports:
+  #     - 5673:5672
+  #     - 15673:15672
+  #   networks:
+  #     - sota-network
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=admin
+  #     - RABBITMQ_DEFAULT_PASS=admin
+
+  redis:
+    container_name: base_redis
+    image: "redis:latest"
+    networks:
+      - sota-network
+    ports:
+      - 6379:6379
+    logging:
+      options:
+        max-size: 10m
+
+  mysql-local:
+    container_name: mysql-local
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=abc123
+    ports:
+      - 3306:3306
+    networks:
+      - sota-network
+    volumes:
+      - db:/var/lib/mysql
+    logging:
+      options:
+        max-size: 10m
+
+volumes:
+  pgdata:
+
+
+networks:
+  sota-network:
+    driver: bridge
