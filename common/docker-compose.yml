@@ -82,8 +82,8 @@ services:
       options:
         max-size: 10m
 
-  mysql-local:
-    container_name: mysql-local
+  mysql:
+    container_name: base_mysql
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=abc123
